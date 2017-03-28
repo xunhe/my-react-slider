@@ -4,6 +4,7 @@ require('./Slider.css');
 export default class Slider extends React.Component {
     constructor(props) {
         super(props);
+        console.log(props);
         this.state = {
             pos: 0//索引
         };
@@ -15,10 +16,13 @@ export default class Slider extends React.Component {
         if(pos==this.props.images.length){
             pos = 0;
         }
+        if(pos==-1){
+            pos = this.props.images.length-1;
+        }
         this.setState({pos});
     }
     play() {
-        setInterval(() => {
+        this.$timer = setInterval(() => {
             this.go(1);
         }, this.props.delay * 1000);
     }
@@ -38,7 +42,7 @@ export default class Slider extends React.Component {
             transitionDuration:this.props.speed+'s'
         };
         return (
-            <div className="slider-wrapper">
+            <div className="slider-wrapper" onMouseOver={()=>{clearInterval(this.$timer)}} onMouseOut={()=>{this.play()}}>
                 <ul className="sliders" style={style}>
                     {
                         this.props.images.map(function (image, index) {
@@ -46,7 +50,10 @@ export default class Slider extends React.Component {
                         })
                     }
                 </ul>
-
+                <div className="slider-arrows">
+                    <span onClick={()=>{this.go(-1)}} className="arrow arrow-left">&lt;</span>
+                    <span onClick={()=>{this.go(1)}} className="arrow arrow-right">&gt;</span>
+                </div>
             </div>
         )
     }
