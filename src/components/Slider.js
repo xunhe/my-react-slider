@@ -41,6 +41,7 @@ export default class Slider extends React.Component {
             left: this.state.pos*(-1000)+'px',
             transitionDuration:this.props.speed+'s'
         };
+        let dots = [];
         return (
             <div className="slider-wrapper" onMouseOver={()=>{clearInterval(this.$timer)}} onMouseOut={()=>{this.play()}}>
                 <ul className="sliders" style={style}>
@@ -53,6 +54,15 @@ export default class Slider extends React.Component {
                 <div className="slider-arrows">
                     <span onClick={()=>{this.go(-1)}} className="arrow arrow-left">&lt;</span>
                     <span onClick={()=>{this.go(1)}} className="arrow arrow-right">&gt;</span>
+                </div>
+                <div className="slider-dots">
+                    {
+                        this.props.images.map((image,index)=>{
+                            return <span className={"dot "+(this.state.pos==index?"active":'')} key={index} onClick={()=>{this.go(index-this.state.pos)}}></span>
+                        })
+
+                    }
+
                 </div>
             </div>
         )
