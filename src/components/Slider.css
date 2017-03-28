@@ -1,0 +1,28 @@
+*{
+    padding: 0;
+    margin:0;
+}
+ul,li{
+    list-style: none;
+}
+.slider-wrapper{
+    width: 1000px;
+    height:500px;
+    position: relative;
+    overflow: hidden;
+    margin:20px auto;
+}
+.sliders{
+    position: absolute;
+    left:0;
+    top:0;
+}
+.slider{
+    float: left;
+    width: 1000px;
+    height:100%;
+}
+.slider img{
+    height: 100%;
+    width:100%;
+}
